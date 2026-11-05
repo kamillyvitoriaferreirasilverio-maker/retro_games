@@ -1,0 +1,271 @@
+/* ---------- Identidade visual RetroGames ----------
+   Conceito: cada jogo é um cartucho de plástico cinza
+   com etiqueta colorida, sobre um fundo de noite arcade.
+   Paleta:
+     --noite    #15132e  fundo
+     --plastico #c4c1cf  corpo do cartucho
+     --tinta    #1e1b3a  texto
+     --magenta  #ff3d8b  ação principal
+     --ciano    #38e1d0  destaque / foco
+   Tipografia: Press Start 2P (títulos), Chakra Petch (texto)
+---------------------------------------------------- */
+:root {
+    --noite: #15132e;
+    --noite-2: #1f1c42;
+    --plastico: #c4c1cf;
+    --plastico-escuro: #a29fb3;
+    --tinta: #1e1b3a;
+    --magenta: #ff3d8b;
+    --magenta-escuro: #d62470;
+    --ciano: #38e1d0;
+    --texto-claro: #e9e6f7;
+    --texto-suave: #9c97c4;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Chakra Petch', Arial, sans-serif;
+    background: var(--noite);
+    color: var(--texto-claro);
+    min-height: 100vh;
+}
+
+/* ---------- Cabeçalho ---------- */
+header {
+    background: var(--noite-2);
+    padding: 36px 8%;
+    border-bottom: 4px solid var(--magenta);
+}
+
+header h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    line-height: 1.3;
+    color: var(--ciano);
+    text-shadow: 3px 3px 0 var(--magenta);
+    margin-bottom: 14px;
+}
+
+header p {
+    color: var(--texto-suave);
+    font-size: 1.05rem;
+}
+
+/* ---------- Área principal ---------- */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.titulo-secao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.titulo-secao h2 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.titulo-secao p {
+    color: var(--texto-suave);
+}
+
+button {
+    font-family: inherit;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 18px;
+    background: var(--magenta);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 0 var(--magenta-escuro);
+    transition: transform 0.08s, box-shadow 0.08s;
+}
+
+button:hover {
+    background: #ff5a9f;
+}
+
+button:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 var(--magenta-escuro);
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--ciano);
+    outline-offset: 2px;
+}
+
+/* ---------- Grid de jogos ---------- */
+.listar-jogos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 26px;
+}
+
+#mensagemVazia {
+    color: var(--texto-suave);
+    grid-column: 1 / -1;
+    border: 2px dashed var(--texto-suave);
+    border-radius: 8px;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* ---------- Card em formato de cartucho ---------- */
+.card-jogo {
+    position: relative;
+    background: var(--plastico);
+    color: var(--tinta);
+    border-radius: 10px 10px 4px 4px;
+    padding: 14px 14px 0;
+    box-shadow: 0 6px 0 var(--plastico-escuro);
+    overflow: hidden;
+}
+
+/* encaixe do cartucho (parte inferior) */
+.card-jogo::after {
+    content: '';
+    display: block;
+    height: 14px;
+    margin: 0 -14px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--plastico-escuro) 0 6px,
+        var(--plastico) 6px 12px
+    );
+}
+
+.plataforma {
+    display: inline-block;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6rem;
+    background: var(--tinta);
+    color: var(--ciano);
+    padding: 6px 8px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.capa {
+    height: 200px;
+    background: var(--tinta);
+    border: 3px solid var(--tinta);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.capa img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.info-jogo {
+    padding: 14px 2px 16px;
+}
+
+.info-jogo h3 {
+    font-size: 1.1rem;
+    line-height: 1.25;
+    margin-bottom: 8px;
+}
+
+.info-jogo p {
+    color: #4b4870;
+    font-size: 0.9rem;
+    overflow-wrap: anywhere;
+}
+
+.preco {
+    display: block;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.85rem;
+    color: var(--magenta-escuro);
+    margin-top: 14px;
+}
+
+/* ---------- Modal ---------- */
+dialog {
+    width: min(90%, 420px);
+    margin: auto;
+    padding: 26px;
+    border: 3px solid var(--ciano);
+    border-radius: 10px;
+    background: var(--noite-2);
+    color: var(--texto-claro);
+}
+
+dialog::backdrop {
+    background: rgba(8, 6, 24, 0.8);
+}
+
+dialog h2 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1rem;
+    color: var(--ciano);
+    margin-bottom: 20px;
+}
+
+form label {
+    display: block;
+    margin: 14px 0 6px;
+    font-weight: 600;
+}
+
+form input {
+    width: 100%;
+    padding: 11px;
+    border: 2px solid #3b3770;
+    border-radius: 4px;
+    background: var(--noite);
+    color: var(--texto-claro);
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+form input::placeholder {
+    color: #6c68a0;
+}
+
+.acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 26px;
+}
+
+button.cancelar {
+    background: #3b3770;
+    box-shadow: 0 4px 0 #2a2755;
+}
+
+button.cancelar:hover {
+    background: #4b4690;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    button {
+        transition: none;
+    }
+}
